@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DMARC Analyzer
+
+A Next.js application to analyze DMARC aggregate reports (RUA) and forensic reports (RUF). Receives reports via Resend Inbound webhooks and provides a web interface for manual analysis.
+
+## Features
+
+- Parse DMARC aggregate reports (RUA) from XML
+- Handle compressed attachments (.xml.gz, .zip)
+- Webhook endpoints for Resend Inbound
+- React Email template for report digests
+- Web interface for paste-and-analyze
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── analyze/route.ts          # POST endpoint for frontend parsing
+│   │   └── webhooks/dmarc/
+│   │       ├── rua/route.ts          # Aggregate report webhook
+│   │       └── ruf/route.ts          # Forensic report webhook (pass-through)
+│   ├── page.tsx                      # Paste-and-analyze frontend
+│   ├── layout.tsx                    # App layout
+│   └── globals.css                   # Resend-style dark theme
+├── components/dmarc/
+│   ├── summary-card.tsx              # Stats card component
+│   ├── status-badge.tsx              # Pass/fail badges
+│   ├── records-table.tsx             # Records table with auth results
+│   └── report-viewer.tsx             # Main report display component
+├── emails/
+│   └── dmarc-report.tsx              # React Email template
+├── lib/
+│   ├── config.ts                     # Environment config
+│   ├── dmarc/
+│   │   ├── parser.ts                 # XML parser & analysis
+│   │   ├── attachments.ts            # .xml, .gz, .zip extraction
+│   │   └── sample.ts                 # Sample XML for testing
+│   ├── email/
+│   │   └── send-report.ts            # Resend email sender
+│   └── webhook/
+│       └── verify.ts                 # Svix signature verification
+├── types/
+│   └── dmarc.ts                      # TypeScript types
+└── .env.example                      # Environment variables template
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Copy the environment template and fill in your credentials:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) to use the analyzer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Description |
+|----------|-------------|
+| `RESEND_API_KEY` | Your Resend API key |
+| `RESEND_WEBHOOK_SECRET` | Webhook signing secret from Resend |
+| `DMARC_RECIPIENT_EMAIL` | Email address to receive report digests |
+| `DMARC_SENDING_DOMAIN` | Verified domain for sending emails |
 
-## Deploy on Vercel
+## Webhook URLs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Configure these endpoints in your Resend dashboard:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **RUA (Aggregate Reports)**: `https://your-domain.com/api/webhooks/dmarc/rua`
+- **RUF (Forensic Reports)**: `https://your-domain.com/api/webhooks/dmarc/ruf`
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Start production server |
+| `pnpm lint:fix` | Run linter with auto-fix |
+| `pnpm format` | Format code |
+| `pnpm email` | Preview email templates |
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org/) - React framework
+- [React 19](https://react.dev/) - UI library
+- [Tailwind CSS 4](https://tailwindcss.com/) - Styling
+- [Resend](https://resend.com/) - Email delivery
+- [React Email](https://react.email/) - Email templates
+- [fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) - XML parsing
