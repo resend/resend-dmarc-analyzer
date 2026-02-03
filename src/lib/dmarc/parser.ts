@@ -76,12 +76,9 @@ function parseRecord(record: unknown): DMARCRecord {
       count: Number(row.count),
       policy_evaluated: policyEvaluated
         ? {
-            disposition: policyEvaluated.disposition as
-              | 'none'
-              | 'quarantine'
-              | 'reject',
-            dkim: policyEvaluated.dkim as 'pass' | 'fail',
-            spf: policyEvaluated.spf as 'pass' | 'fail',
+            disposition: normalizeDisposition(policyEvaluated.disposition),
+            dkim: normalizeDMARCResult(policyEvaluated.dkim),
+            spf: normalizeDMARCResult(policyEvaluated.spf),
             reason: normalizeToArray(policyEvaluated.reason).map(
               (reason: unknown) => {
                 const re = reason as Record<string, unknown>;
@@ -126,6 +123,22 @@ function normalizeToArray<T>(value: T | T[] | undefined | null): T[] {
     return [];
   }
   return Array.isArray(value) ? value : [value];
+}
+
+function normalizeDMARCResult(value: unknown): 'pass' | 'fail' {
+  const str = String(value).toLowerCase().trim();
+  return str === 'pass' ? 'pass' : 'fail';
+}
+
+function normalizeDisposition(value: unknown): 'none' | 'quarantine' | 'reject' {
+  const str = String(value).toLowerCase().trim();
+  if (str === 'quarantine') {
+    return 'quarantine';
+  }
+  if (str === 'reject') {
+    return 'reject';
+  }
+  return 'none';
 }
 
 /**
