@@ -9,7 +9,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check . --write",
     "format": "biome format --write",
-    "email": "email dev --dir src/emails --port 3003"
+    "email": "email dev --dir src/emails --port 3003",
+    "test:email": "tsx scripts/send-test-email.ts"
   },
   "dependencies": {
     "@react-email/body": "^0.2.1",
@@ -44,8 +45,10 @@
     "@types/pako": "^2.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.3",
     "react-email": "^5.2.5",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

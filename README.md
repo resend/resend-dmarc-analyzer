@@ -92,7 +92,8 @@ Configure these endpoints in your Resend dashboard:
 | `pnpm start` | Start production server |
 | `pnpm lint:fix` | Run linter with auto-fix |
 | `pnpm format` | Format code |
-| `pnpm email` | Preview email templates |
+| `pnpm email` | Preview email templates (port 3003) |
+| `pnpm test:email <email>` | Send test email with sample data |
 
 ## Tech Stack
 
