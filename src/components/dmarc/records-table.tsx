@@ -66,8 +66,12 @@ export function RecordsTable({ records }: RecordsTableProps) {
           break;
         }
         case 'override': {
-          const aOverride = String(a.row.policy_evaluated?.reason?.[0]?.type ?? '');
-          const bOverride = String(b.row.policy_evaluated?.reason?.[0]?.type ?? '');
+          const aOverride = String(
+            a.row.policy_evaluated?.reason?.[0]?.type ?? '',
+          );
+          const bOverride = String(
+            b.row.policy_evaluated?.reason?.[0]?.type ?? '',
+          );
           comparison = aOverride.localeCompare(bOverride);
           break;
         }
@@ -226,7 +230,9 @@ function SortableHeader({
       onClick={() => onSort(column)}
     >
       <span className={`inline-flex items-center gap-1 ${justifyClass}`}>
-        <span className={isActive ? 'text-gray-9' : 'text-gray-6'}>{label}</span>
+        <span className={isActive ? 'text-gray-9' : 'text-gray-6'}>
+          {label}
+        </span>
         <SortIcon isActive={isActive} direction={direction} />
       </span>
     </th>

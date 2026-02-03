@@ -130,7 +130,9 @@ function normalizeDMARCResult(value: unknown): 'pass' | 'fail' {
   return str === 'pass' ? 'pass' : 'fail';
 }
 
-function normalizeDisposition(value: unknown): 'none' | 'quarantine' | 'reject' {
+function normalizeDisposition(
+  value: unknown,
+): 'none' | 'quarantine' | 'reject' {
   const str = String(value).toLowerCase().trim();
   if (str === 'quarantine') {
     return 'quarantine';
