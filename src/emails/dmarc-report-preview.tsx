@@ -1,5 +1,5 @@
-import { DMARCReportEmail } from './dmarc-report';
 import type { DMARCAnalysis } from '@/types/dmarc';
+import { DMARCReportEmail } from './dmarc-report';
 
 const sampleAnalysis: DMARCAnalysis = {
   report: {
