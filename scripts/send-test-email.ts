@@ -7,8 +7,8 @@
  * Requires RESEND_API_KEY and DMARC_SENDING_DOMAIN env vars
  */
 
-import { config } from 'dotenv';
 import { existsSync } from 'node:fs';
+import { config } from 'dotenv';
 import { Resend } from 'resend';
 import { DMARCReportEmail } from '../src/emails/dmarc-report';
 import type { DMARCAnalysis } from '../src/types/dmarc';
