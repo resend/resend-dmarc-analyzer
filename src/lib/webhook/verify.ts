@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 
 /**
  * Verify Resend webhook signature (Svix)
- * Headers: id, timestamp, signature (not svix-id, svix-timestamp, svix-signature)
+ * Headers: svix-id, svix-timestamp, svix-signature
  */
 export function verifyWebhookSignature(
   payload: string,
@@ -57,11 +57,9 @@ export function verifyWebhookSignature(
 export function extractWebhookHeaders(
   headers: Headers,
 ): { id: string; timestamp: string; signature: string } | null {
-  const id = headers.get('id') || headers.get('webhook-id');
-  const timestamp =
-    headers.get('timestamp') || headers.get('webhook-timestamp');
-  const signature =
-    headers.get('signature') || headers.get('webhook-signature');
+  const id = headers.get('svix-id');
+  const timestamp = headers.get('svix-timestamp');
+  const signature = headers.get('svix-signature');
 
   if (!id || !timestamp || !signature) {
     return null;
