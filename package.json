@@ -28,7 +28,7 @@
     "@react-email/section": "^0.0.17",
     "@react-email/tailwind": "^2.0.3",
     "@react-email/text": "^0.1.6",
-    "fast-xml-parser": "^5.3.4",
+    "fast-xml-parser": "^5.3.6",
     "jszip": "^3.10.1",
     "next": "16.1.6",
     "pako": "^2.1.0",
