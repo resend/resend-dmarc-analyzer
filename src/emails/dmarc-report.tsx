@@ -353,11 +353,17 @@ DMARCReportEmail.PreviewProps = {
           row: {
             source_ip: '209.85.220.41',
             count: 1523,
-            policy_evaluated: { disposition: 'none', dkim: 'pass', spf: 'pass' },
+            policy_evaluated: {
+              disposition: 'none',
+              dkim: 'pass',
+              spf: 'pass',
+            },
           },
           identifiers: { header_from: 'example.com' },
           auth_results: {
-            dkim: [{ domain: 'example.com', selector: 'google', result: 'pass' }],
+            dkim: [
+              { domain: 'example.com', selector: 'google', result: 'pass' },
+            ],
             spf: [{ domain: 'example.com', result: 'pass' }],
           },
         },
@@ -365,11 +371,17 @@ DMARCReportEmail.PreviewProps = {
           row: {
             source_ip: '198.51.100.42',
             count: 87,
-            policy_evaluated: { disposition: 'none', dkim: 'pass', spf: 'pass' },
+            policy_evaluated: {
+              disposition: 'none',
+              dkim: 'pass',
+              spf: 'pass',
+            },
           },
           identifiers: { header_from: 'example.com' },
           auth_results: {
-            dkim: [{ domain: 'example.com', selector: 'resend', result: 'pass' }],
+            dkim: [
+              { domain: 'example.com', selector: 'resend', result: 'pass' },
+            ],
             spf: [{ domain: 'example.com', result: 'pass' }],
           },
         },
@@ -377,7 +389,11 @@ DMARCReportEmail.PreviewProps = {
           row: {
             source_ip: '203.0.113.99',
             count: 42,
-            policy_evaluated: { disposition: 'reject', dkim: 'fail', spf: 'fail' },
+            policy_evaluated: {
+              disposition: 'reject',
+              dkim: 'fail',
+              spf: 'fail',
+            },
           },
           identifiers: { header_from: 'example.com' },
           auth_results: {
@@ -393,12 +409,27 @@ DMARCReportEmail.PreviewProps = {
               disposition: 'quarantine',
               dkim: 'fail',
               spf: 'pass',
-              reason: [{ type: 'forwarded', comment: 'Message was forwarded by known forwarder' }],
+              reason: [
+                {
+                  type: 'forwarded',
+                  comment: 'Message was forwarded by known forwarder',
+                },
+              ],
             },
           },
-          identifiers: { header_from: 'example.com', envelope_to: 'recipient.com' },
+          identifiers: {
+            header_from: 'example.com',
+            envelope_to: 'recipient.com',
+          },
           auth_results: {
-            dkim: [{ domain: 'example.com', selector: 'google', result: 'fail', human_result: 'signature verification failed' }],
+            dkim: [
+              {
+                domain: 'example.com',
+                selector: 'google',
+                result: 'fail',
+                human_result: 'signature verification failed',
+              },
+            ],
             spf: [{ domain: 'forwarder.com', result: 'pass' }],
           },
         },
@@ -415,7 +446,9 @@ DMARCReportEmail.PreviewProps = {
           },
           identifiers: { header_from: 'example.com' },
           auth_results: {
-            dkim: [{ domain: 'example.com', selector: 'google', result: 'pass' }],
+            dkim: [
+              { domain: 'example.com', selector: 'google', result: 'pass' },
+            ],
             spf: [{ domain: 'mailinglist.com', result: 'softfail' }],
           },
         },
