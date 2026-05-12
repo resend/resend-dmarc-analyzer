@@ -34,7 +34,7 @@ importers:
         specifier: 2.3.13
         version: 2.3.13
       '@react-email/ui':
-        specifier: latest
+        specifier: 6.1.1
         version: 6.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@tailwindcss/postcss':
         specifier: 4.2.1
@@ -55,7 +55,7 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3
       react-email:
-        specifier: latest
+        specifier: 6.1.1
         version: 6.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tailwindcss:
         specifier: 4.2.1
