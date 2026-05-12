@@ -12,7 +12,7 @@ import {
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+} from 'react-email';
 import type { DMARCAnalysis, DMARCRecord } from '@/types/dmarc';
 
 interface DMARCReportEmailProps {
