@@ -62,7 +62,7 @@ export default function Home() {
               />
             </svg>
             <h1 className="text-lg font-semibold text-gray-10">
-              DMARC Analyzer
+              DMARC Analyzer for Elloquist LLC
             </h1>
           </div>
           <a
